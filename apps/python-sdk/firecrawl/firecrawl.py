@@ -48,6 +48,7 @@ class DeepResearchParams(pydantic.BaseModel):
     maxDepth: Optional[int] = 7
     timeLimit: Optional[int] = 270
     maxUrls: Optional[int] = 20
+    analysisPrompt: Optional[str] = None
     __experimental_streamSteps: Optional[bool] = None
 
 class DeepResearchResponse(pydantic.BaseModel):
@@ -1098,6 +1099,8 @@ class FirecrawlApp:
 
         if response.status_code == 402:
             message = f"Payment Required: Failed to {action}. {error_message} - {error_details}"
+        elif response.status_code == 403:
+            message = f"Website Not Supported: Failed to {action}. {error_message} - {error_details}"
         elif response.status_code == 408:
             message = f"Request Timeout: Failed to {action} as the request timed out. {error_message} - {error_details}"
         elif response.status_code == 409:
