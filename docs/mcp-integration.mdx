@@ -1,0 +1,69 @@
+# Firecrawl MCP Integration
+
+## Overview
+The Firecrawl MCP (Model Control Protocol) integration allows seamless interaction with Firecrawl's capabilities directly from Cursor IDE. This integration enables real-time analysis of web content and direct interaction with Ollama models.
+
+## Server Setup
+
+### Prerequisites
+- Node.js 14+
+- Ollama installed and running
+- Cursor IDE with MCP support
+
+### Configuration
+The server runs on `http://localhost:3456` by default. You can configure the port using the `FIRECRAWL_OLLAMA_PORT` environment variable.
+
+## Available Tools
+
+### analyze_url
+Analyzes a webpage using Firecrawl and Ollama.
+
+Parameters:
+- `url` (string, required): The URL to analyze
+- `model` (string, optional): Ollama model to use
+
+### analyze_with_ollama
+Analyzes content directly with Ollama.
+
+Parameters:
+- `content` (string, required): The content to analyze
+- `model` (string, optional): Ollama model to use
+- `temperature` (number, optional): Temperature for generation
+
+### list_models
+Lists available Ollama models.
+
+## Known Issues
+
+1. SSE Connection Handling
+   - Multiple connections may be created for the same client
+   - Connection cleanup needs improvement
+
+2. Host Binding
+   - Inconsistencies between localhost and 127.0.0.1
+   - Need to standardize host binding across the application
+
+3. Tools Display
+   - Tools may not appear immediately in Cursor
+   - Format validation issues with tool responses
+
+## Troubleshooting
+
+### Connection Issues
+If you encounter connection issues:
+1. Ensure the server is running on the correct port
+2. Check if Ollama is running and accessible
+3. Verify no other service is using port 3456
+
+### Tool Visibility
+If tools are not visible in Cursor:
+1. Restart the MCP server
+2. Refresh the Cursor connection
+3. Check server logs for any error messages
+
+## Development Status
+This integration is currently in development. Key areas of focus:
+- Improving connection stability
+- Enhancing tool response format
+- Adding more robust error handling
+- Implementing proper connection lifecycle management 
